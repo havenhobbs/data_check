@@ -21,7 +21,7 @@ DATA_DIR = Path(__file__).parent.parent / "data"
 DATA_DIR.mkdir(exist_ok=True)
 
 DEPARTMENTS = ["Cardiology", "Orthopedics", "Primary Care", "Radiology", "Oncology", "Pediatrics"]
-ENCOUNTER_TYPES = ["New Patient", "Follow-Up", "Telehealth", "Surgery", "Annual Physical"]
+ENCOUNTER_TYPES = ["New Patient", "Follow-Up", "Telehealth", "Surgery", "Procedure", "Annual Physical"]
 STATUSES = ["Scheduled", "Completed", "Cancelled", "No-Show"]
 
 N_PATIENTS = 400
