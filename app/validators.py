@@ -69,10 +69,10 @@ def check_missing_required_field(session):
         
     return issues
     
-def check_date_logic(session):
+def check_date_logic(session, reference_datetime=None):
     issues = []
     patients_by_id = {p.patient_id: p for p in session.query(Patient).all()}
-    now = datetime.now()
+    now = reference_datetime or datetime.now()
     for enc in session.query(Encounter).all():
         if enc.scheduled_datetime is None:
             continue

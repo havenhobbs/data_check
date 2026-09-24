@@ -39,8 +39,8 @@ def stats():
     return jsonify({
         "patients": n_patients,
         "providers": n_providers,
-        "encounter": n_encounters,
-        "issues": len(issues),
+        "encounters": n_encounters,
+        "total_issues": len(issues),
     })
     
 @app.route("/api/summary")
