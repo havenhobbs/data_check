@@ -6,8 +6,10 @@ Independent functions allow the ability to add/alter functions as a database cha
 
 from datetime import datetime
 from collections import defaultdict
+from config import REFERENCE_DATETIME
 
 from models import get_engine, get_session, Patient, Provider, Encounter
+from rules import RULE_CATALOG
 
 VALID_ENCOUNTER_TYPES = {"New Patient", "Follow-Up", "Telehealth", "Procedure", "Surgery", "Annual Physical"}
 VALID_STATUSES = {"Scheduled", "Completed", "Cancelled", "No-Show"}
@@ -152,6 +154,17 @@ def check_np_scope_mismatch(session):
             })
     return issues
 
+def enrich_issue(issue):
+    rule = RULE_CATALOG[issue["error_type"]]
+    return {
+        **issue,
+        "rule_name": rule["name"],
+        "quality_dimension": rule["dimension"],
+        "severity": rule["severity"],
+        "recommended_action": rule["recommended_action"],
+        "source_tables": rule["source_tables"],
+    }
+
 ALL_CHECKS = [
     check_orphaned_patient_fk,
     check_orphaned_provider_fk,
@@ -164,16 +177,27 @@ ALL_CHECKS = [
     check_np_scope_mismatch
 ]
 
-def run_all_checks(session=None):
+def run_all_checks(session=None, reference_datetime=REFERENCE_DATETIME):
     own_session = session is None
+    
     if own_session:
         engine = get_engine()
         session = get_session(engine)
         
-    all_issues = []
+    raw_issues = []
+    
     for check in ALL_CHECKS:
-        all_issues.extend(check(session))
+        if check is check_date_logic:
+            raw_issues.extend(
+                check(
+                    session,
+                    reference_datetime=reference_datetime,
+                )
+            )
+        else:
+            raw_issues.extend(check(session))
         
     if own_session:
         session.close()
-    return all_issues
+        
+    return [enrich_issue(issue) for issue in raw_issues]

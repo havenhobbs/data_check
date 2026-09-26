@@ -7,8 +7,13 @@ This was done to accurately assess the validator's effectiveness.
 
 import csv
 import random
+import sys
 from pathlib import Path
 from datetime import datetime, timedelta
+
+sys.path.insert(0, str(Path(__file__).parent.parent / "app"))
+
+from config import REFERENCE_DATETIME
 
 DATA_DIR = Path (__file__). parent.parent / "data"
 random.seed(7)
@@ -97,19 +102,27 @@ def main():
         ground_truth.append(("encounter", enc["encounter_id"], "missing_required_field"))
         
     #6. Date Logic Violation -> schedule a "Completed" encounter in the future or before dob
-    patients_by_id = {p["patient_id"]: p for p in patients}
+    patients_by_id = {patient["patient_id"]: patient for patient in patients}
+    
     for enc in pick_targets(ERROR_COUNTS["date_logic_violation"]):
+        injected = False
+        
         if random.random() < 0.5:
             enc["status"] = "Completed"
-            future = datetime.now() + timedelta(days=random.randint(5, 60))
+            future = REFERENCE_DATETIME + timedelta(days=random.randint(5, 60))
             enc["scheduled_datetime"] = future.isoformat()
+            injected = True
+            
         else:
             patient = patients_by_id.get(enc["patient_id"])
             if patient:
                 dob = datetime.fromisoformat(patient["dob"])
                 before_birth = dob - timedelta(days=random.randint(30, 400))
                 enc["scheduled_datetime"] = before_birth.isoformat()
-        ground_truth.append(("encounter", enc["encounter_id"], "date_logic_violation"))
+                injected = True
+                
+        if injected: 
+            ground_truth.append(("encounter", enc["encounter_id"], "date_logic_violation"))
         
     #7. Department Mismatch -> set encounter department different from provider's assigned department
     providers_by_id = {p["provider_id"]: p for p in providers}

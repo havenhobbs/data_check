@@ -12,6 +12,7 @@ Endpoints:
 import sys
 from pathlib import Path
 from collections import Counter
+from evaluation import evaluate_validator
 
 from flask import Flask, jsonify, request
 from flask_cors import CORS
@@ -63,6 +64,10 @@ def issues():
         all_issues = [i for i in all_issues if i["error_type"] == error_type]
         
     return jsonify(all_issues)
+
+@app.route("/api/evaluation")
+def evaluation():
+    return jsonify(evaluate_validator())
 
 if __name__ == "__main__":
     app.run(debug=True, port=5001)

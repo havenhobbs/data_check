@@ -8,10 +8,15 @@ This is to ensure that our validator catches everything it should and nothing it
 
 import csv
 import random
+import sys
 from datetime import datetime, timedelta
 from pathlib import Path
 
 from faker import Faker
+
+sys.path.insert(0, str(Path(__file__).parent.parent / "app"))
+
+from config import REFERENCE_DATETIME
 
 fake = Faker()
 Faker.seed(42)
@@ -72,14 +77,14 @@ def generate_encounters(n, patients, providers):
         dob = datetime.fromisoformat(patient["dob"])
         
         #Scheduled datetime must be after the pts birth and within a realistic window.
-        earliest = max(dob, datetime.now() - timedelta(days=730))
-        days_range = max((datetime.now() + timedelta(days=60) - earliest).days, 1)
+        earliest = max(dob, REFERENCE_DATETIME - timedelta(days=730))
+        days_range = max((REFERENCE_DATETIME + timedelta(days=60) - earliest).days, 1)
         scheduled = earliest + timedelta(days=random.randint(0, days_range))
         
         status = random.choice(STATUSES)
         
         #A Completed encounter cannot be in the future.
-        if status == "Completed" and scheduled > datetime.now():
+        if status == "Completed" and scheduled > REFERENCE_DATETIME:
             scheduled = datetime.now() - timedelta(days=random.randint(1, 300))
             
         #Keeping clean_data consistent, an NP will not be assigned "Surgery" encounter.
