@@ -1,13 +1,12 @@
 RULE_CATALOG = {
     "orphaned_patient_fk":{
-        "name": "Orphaned patient reference",
+        "name": "Orphaned Patient Reference",
         "dimension": "referential_integrity",
         "severity": "high",
         "source_tables": ["encounters", "patients"],
         "fields": ["encounters.patient_id", "patients.patient_id"],
         "why_it_matters": (
             "An encounter cannot be reliably attributed to a valid patient."
-            
         ),
         "recommended_action": (
             "Verify the patient identifier in the source extract and reconcile the encounter with the patient master."
@@ -15,7 +14,7 @@ RULE_CATALOG = {
         
     },
     "orphaned_provider_fk": {
-        "name": "Orphaned provider reference",
+        "name": "Orphaned Provider Reference",
         "dimension": "referential_integrity",
         "severity": "high",
         "source_tables": ["encounters", "providers"],
@@ -28,13 +27,13 @@ RULE_CATALOG = {
         ),
     },
     "missing_required_field": {
-        "name": "Missing required field",
+        "name": "Missing Required Field",
         "dimension": "completeness",
         "severity": "high",
         "source_tables": ["encounters"],
         "fields": ["encounters.patient_id", "encounters.scheduled_datetime"],
         "why_it_matters": (
-            "Required encounter fields are needed for reliatble scheduling and reporting."
+            "Required encounter fields are needed for reliable scheduling and reporting."
         ),
         "recommended_action": (
             "Complete the missing source value or route the record for correction."
@@ -42,7 +41,7 @@ RULE_CATALOG = {
         
     },
     "invalid_enum": {
-        "name": "Invalid coded value",
+        "name": "Invalid Coded Value",
         "dimension": "validity",
         "severity": "medium",
         "source_tables": ["encounters"],
@@ -56,7 +55,7 @@ RULE_CATALOG = {
     },
     
     "date_logic_violation": {
-        "name": "Date logic violation",
+        "name": "Date Logic Violation",
         "dimension": "temporal_plausibility",
         "severity": "high",
         "source_tables": ["encounters", "patients"],
@@ -74,7 +73,7 @@ RULE_CATALOG = {
     },
     
     "department_mismatch": {
-        "name": "Department mismatch",
+        "name": "Department Mismatch",
         "dimension": "consistency",
         "severity": "medium", 
         "source_tables": ["encounters", "providers"],
@@ -88,7 +87,7 @@ RULE_CATALOG = {
     },
     
     "duplicate_mrn": {
-        "name": "Duplicate medical record number",
+        "name": "Duplicate Medical Record Number",
         "dimension": "uniqueness",
         "severity": "high",
         "source_tables": ["patients"],
@@ -102,7 +101,7 @@ RULE_CATALOG = {
     },
     
     "duplicate_encounter": {
-        "name": "Duplicate encounter",
+        "name": "Duplicate Encounter",
         "dimension": "uniqueness",
         "severity": "medium",
         "source_tables": ["encounters"],
@@ -120,7 +119,7 @@ RULE_CATALOG = {
     },
     
     "np_scope_mismatch": {
-        "name": "Simulated provider-assignment check",
+        "name": "Simulated Provider-Assignment Check",
         "dimension": "business_rule_conformance",
         "severity": "medium", 
         "source_tables": ["encounters", "providers"],
