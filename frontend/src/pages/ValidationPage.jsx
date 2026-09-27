@@ -53,9 +53,7 @@ function ValidationPage() {
         <section>
             <div className="panel-header">
                 <div>
-                   <p className="section-description">
-                        Controlled error-injection results compared with record-level ground truth.
-                    </p>
+                   
                 </div>
             </div>
 
@@ -115,7 +113,7 @@ function ValidationPage() {
                 <p>
                     The project generates a clean synthetic dataset, injects controlled
                     data-quality defects into copies of the source extracts, records
-                    expected findings in <code>ground_truth_errors.csv</code>, and
+                    expected findings in ground_truth_errors.csv, and
                     compares validator output with that record-level answer key.
                 </p>
             </section>

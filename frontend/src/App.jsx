@@ -3,6 +3,7 @@ import "./App.css";
 import ValidationPage from "./pages/ValidationPage.jsx";
 import Rules from './pages/Rules.jsx';
 import Issues from './pages/Issues.jsx';
+import Overview from './pages/Overview.jsx';
 
 
 function App() {
@@ -50,19 +51,7 @@ function App() {
         {currentPage === "validation" && <ValidationPage />}
         {currentPage === "rules" && <Rules />}
         {currentPage === "issues" && <Issues />}
-
-        {currentPage == "overview" && (
-          <>
-            <header className="page-title">
-              <h2>Overview</h2>
-              <p>High-level summary of the current data-quality validation run.</p>
-            </header>
-
-            <section className="empty-slate">
-              <p>Working on this one!</p>
-            </section>
-          </>
-        )}
+        {currentPage == "overview" && <Overview />}
         
       </main>
     </div>
