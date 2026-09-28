@@ -69,9 +69,6 @@ function Issues() {
 
     return (
         <section>
-            <header className="page-title">
-            <h1></h1>
-            </header>
 
             <section className="issue-filters" aria-label="Issue filters">
                 <label className="issue-search">
@@ -142,15 +139,15 @@ function Issues() {
                             <option value="encounter">Encounter</option>
                         </select>
                     </label>
-
-                    <button 
-                        className="reset-button"
-                        type="button"
-                        onClick={resetFilters}
-                    >
-                        Reset
-                    </button>
                 </div>
+
+                <button 
+                    className="reset-button"
+                    type="button"
+                    onClick={resetFilters}
+                >
+                    Reset
+                </button>
             </section>
 
             <div className="issue-results-summary">
