@@ -7,8 +7,10 @@ function Home({ onNavigate }) {
           <h1>Healthcare Data Quality Validator</h1>
 
           <p className="home-hero__lead">
-            A full-stack data-quality monitoring application built around
-            synthetic hospital scheduling and registration records.
+            Schedulign and registration data drives clinic operations, and errors in
+            it cause misattributed visits, patient-matching risk, and bad reporting.
+            This project simulates that data, injects known defects, and builds
+            validation rules and a review queue to find and triage them.
           </p>
 
           <p className="home-hero__copy">

@@ -17,7 +17,7 @@ for row in client.get("/api/summary").get_json():
     print(" ", row)
     
 print("\nGET /api/issues?error_type=duplicate_mrn (first 3)")
-issues = client.get("/api/issues?error_type=duplicate_mrn").get_json()
-for i in issues[:3]:
+data = client.get("/api/issues?error_type=duplicate_mrn").get_json()
+for i in data["items"][:3]:
     print(" ", i)
-print(f"  ... {len(issues)} total")
+print(f"  ... {len(data['total_items'])} total")

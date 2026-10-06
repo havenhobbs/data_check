@@ -64,7 +64,7 @@ function ValidationPage() {
                 />
                 <VitalStat
                     label="Correctly Detected"
-                    value={results.issues_detected}
+                    value={results.true_positives}
                 />
                 
                 <VitalStat

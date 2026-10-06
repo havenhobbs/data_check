@@ -85,7 +85,7 @@ def generate_encounters(n, patients, providers):
         
         #A Completed encounter cannot be in the future.
         if status == "Completed" and scheduled > REFERENCE_DATETIME:
-            scheduled = datetime.now() - timedelta(days=random.randint(1, 300))
+            scheduled = max(earliest, REFERENCE_DATETIME - timedelta(days=random.randint(1, 300)))
             
         #Keeping clean_data consistent, an NP will not be assigned "Surgery" encounter.
         encounter_type_options = ENCOUNTER_TYPES

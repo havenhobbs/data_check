@@ -18,7 +18,7 @@ def load_ground_truth():
     with open(DATA_DIR / "ground_truth_errors.csv", newline="") as f:
         for row in csv.DictReader(f):
             truth.add((row["record_type"], int(row["record_id"]), row["error_type"]))
-        return truth
+    return truth
     
 def main():
     engine = get_engine()
@@ -45,7 +45,7 @@ def main():
     print(f"recall:                 {recall:.1%}")
     
     if false_negatives:
-        print("\nmissed (false negatives):}")
+        print("\nmissed (false negatives):")
         for fn in sorted(false_negatives, key=lambda x: x[2])[:10]:
             print(f"    {fn}")
             

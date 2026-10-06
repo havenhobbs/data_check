@@ -637,12 +637,12 @@ th {
 
 .issues-table {
   width: 100%;
-  min-width: none;
+  min-width: None;
   table-layout: fixed;
 }
 
 .issues-table td {
-  padding: 0.9rem, 1rem;
+  padding: 0.9rem 1rem;
   vertical-align: top;
 }
 
