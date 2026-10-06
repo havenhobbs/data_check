@@ -25,7 +25,7 @@ from rules import RULE_CATALOG
 app = Flask(__name__)
 CORS(app, origins=[
     "http://localhost:5173",
-    "https://your-frontend.vercel.app",
+    "https://data-check-nafa.onrender.com",
     ])
 
 def get_session_for_request():
