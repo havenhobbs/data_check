@@ -1,9 +1,13 @@
 # data_check
 
-[![Python 3.10+](https://shields.io)](https://python.org)
-[![Flask](https://shields.io)](https://palletsprojects.com)
-[![SQLAlchemy](https://shields.io)](https://sqlalchemy.org)
-[![Vite + React 19](https://shields.io)](https://vite.dev)
+![Python](https://img.shields.io/badge/python-3.10+-blue)
+![Flask](https://img.shields.io/badge/Flask-000000?logo=flask&logoColor=white)
+![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-306998?logo=python&logoColor=white)
+![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=black)
+![Vite](https://img.shields.io/badge/Vite-5.3-646CFF)
+
+
+*[live deployment](https://data-check-wheat.vercel.app)*
 
 `data_check` is an enterprise data validation and analytical auditing engine designed to analyze complex relational databases, flag structural constraints, and measure pipeline error-detection accuracy. 
 
@@ -38,7 +42,7 @@ data_check/
 │   ├── rules.py                   # Central Decoupled Rule Catalog (Configuration Management)
 │   ├── validators.py              # Granular Anomaly Isolation Workers (Closed-Loop Auditing)
 │   └── verify_api.py              # Local Integration Script & HTTP Route Verifier
-├── data/                          # Managed Local Repository Datasets
+├── data/                          
 │   ├── encounters_clean.csv       # Pre-mutation Relational Base Log
 │   ├── encounters_dirty.csv       # Post-mutation Telemetry Extract
 │   ├── ground_truth_errors.csv    # Programmatic Answer Key Matrix (Deterministic Key)
@@ -46,10 +50,10 @@ data_check/
 │   ├── patients_dirty.csv         # Mutated Patient Telemetry Roster
 │   ├── providers_clean.csv        # Baseline Reference Personnel Logs
 │   └── providers_dirty.csv        # Mutated Reference Personnel Logs
-├── frontend/                      # User Experience & Metrics View Layer
-│   ├── public/                    # Static Global App Shell Assets
+├── frontend/                      
+│   ├── public/                    
 │   └── src/
-│       ├── assets/                # Local Dashboard Layout Graphics
+│       ├── assets/                
 │       ├── components/            # Reusable Presentation Components
 │       │   ├── FilterBar.jsx      # Multi-Select Reactive Query Panel
 │       │   ├── Header.jsx         # Uniform Dashboard Branding Layout
