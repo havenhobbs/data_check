@@ -7,20 +7,20 @@
 
 `data_check` is an enterprise data validation and analytical auditing engine designed to analyze complex relational databases, flag structural constraints, and measure pipeline error-detection accuracy. 
 
-The software architecture operates as a **closed-loop Failure Reporting, Analysis, and Corrective Action System(FRACAS)**. It programmatically generates baseline testing environments, injects exact deterministic mutations into copies of those extracts, evaluates parameters against independent rules workers, and calculates mathmatical data-integrity metrics (`Precision` and `Recall`) against an immutable record-level answer key. 
+The software architecture operates as a **closed-loop Failure Reporting, Analysis, and Corrective Action System (FRACAS)**. It programmatically generates baseline testing environments, injects exact deterministic mutations into copies of those extracts, evaluates parameters against independent rules workers, and calculates mathmatical data-integrity metrics (`Precision` and `Recall`) against an immutable record-level answer key. 
 
 ---
 
 ## System Architecture & Data Loop
 
-The project is structured into fully decoupled operational layers, ensuring clear configuration management and complete isolation of business validation logic from presentation views:
+The project is structured into decoupled operational layers, ensuring clear configuration management and complete isolation of business validation logic from presentation views:
 
-*   **Step 1: Simulation & Baseline Generation** — `scripts/clean_data.py` uses deterministic rules to produce pristine reference files (`*_clean.csv`) with no internal defects.
+*   **Step 1: Simulation & Baseline Generation** — `scripts/clean_data.py` uses deterministic rules to produce reference files (`*_clean.csv`) with no internal defects.
 *   **Step 2: Controlled Error Injection** — `scripts/inject_errors.py` introduces targeted anomalies across explicit quality dimensions and writes the record-level locations directly to an immutable answer key (`ground_truth_errors.csv`).
 *   **Step 3: Persistence & Database Hydration** — `app/load_data.py` utilizes SQLAlchemy ORM models to parse files dynamically and ingest them into a localized `data_check.db` engine.
 *   **Step 4: Statistical Evaluation** — `app/evaluation.py` assesses validator engine accuracy against the ground truth answer key, mapping live performance metrics (Precision and Recall) by rule.
 *   **Step 5: API Streaming Gateway** — `app/api.py` exposes a clean Flask REST API layer supporting conditional filters and full-text wildcard queries.
-*   **Step 6: Metric Visualization UI** — A modern, component-driven Vite + React 19 single-page application transforms backend telemetry streams into an interactive triage review queue.
+*   **Step 6: Metric Visualization UI** — A modern, component-driven application transforms backend telemetry streams into an interactive triage review queue.
 
 ---
 
@@ -48,13 +48,8 @@ data_check/
 │   └── providers_dirty.csv        # Mutated Reference Personnel Logs
 ├── frontend/                      # User Experience & Metrics View Layer
 │   ├── public/                    # Static Global App Shell Assets
-│   │   ├── favicon.svg            # App Browser Tab Icon Vector
-│   │   └── icons.svg              # Centralized Sprite Graphic Vectors
 │   └── src/
 │       ├── assets/                # Local Dashboard Layout Graphics
-│       │   ├── hero.png           # Home Page Technical Graphic Splash
-│       │   ├── react.svg          # Visual Framework Assets
-│       │   └── vite.svg           # Local Compilation Engine Asset
 │       ├── components/            # Reusable Presentation Components
 │       │   ├── FilterBar.jsx      # Multi-Select Reactive Query Panel
 │       │   ├── Header.jsx         # Uniform Dashboard Branding Layout
