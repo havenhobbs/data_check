@@ -23,10 +23,9 @@ from validators import run_all_checks
 from rules import RULE_CATALOG
 
 app = Flask(__name__)
-CORS(app, origins=[
-    "http://localhost:5173",
-    "https://data-check-nafa.onrender.com",
-    ])
+CORS(app, resources={
+    r"/api/*": {"origins": "*"}
+    })
 
 def get_session_for_request():
     engine = get_engine()
